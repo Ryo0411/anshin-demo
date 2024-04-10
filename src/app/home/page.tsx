@@ -20,7 +20,7 @@ function TopPage() {
             <Box pt={3}>
               <Link href="/register" passHref>
                 <Button variant="contained" color="success">
-                  徘徊者登録
+                  徘徊者情報
                 </Button>
               </Link>
             </Box>

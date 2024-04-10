@@ -1,8 +1,10 @@
+"use client";
 import React from "react";
 import { AppBar, IconButton, Link, Toolbar, Typography } from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 
 function Header() {
+
   return (
     <AppBar position="static" sx={{ backgroundColor: "#0c6587" }}>
       <Toolbar
@@ -12,10 +14,11 @@ function Header() {
         <IconButton
           edge="start"
           color="inherit"
-          aria-label="menu"
+          aria-label="back"
           sx={{ position: "absolute", left: 15 }}
+          onClick={() => window.history.back()}
         >
-          <MenuIcon />
+          <ArrowBackIosIcon />
         </IconButton>
         <Typography variant="h6" color="inherit">
           <Link

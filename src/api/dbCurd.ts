@@ -36,27 +36,18 @@ export async function CreateUser(request: CreateUserType) {
     return result;
   } catch (e) {
     console.log(e);
-    return e;
+    throw e;
   }
 }
 
-type OnseiDataType = {
-  id: number;
-  user_id: number;
-  audio_path: string;
-};
-export async function CreateOnseiData(request: OnseiDataType) {
-  let id = request.id;
-  let user_id = request.user_id;
-  let audio_path = request.audio_path;
+export async function CreateOnseiData(user_id: number, audio_name: string) {
   let create_at = new Date().toISOString();
   let del_flg = 0;
 
   try {
     const raw = JSON.stringify({
-      id: id,
       user_id: user_id,
-      audio_path: audio_path,
+      audio_name: audio_name,
       create_at: create_at,
       del_flg: del_flg,
     });
@@ -69,10 +60,29 @@ export async function CreateOnseiData(request: OnseiDataType) {
     };
 
     await fetch(apiURL + "/onsei_lists", requestOptions)
-      .then((response) => response.text())
+      .then((response) => response.json())
       .then((result) => console.log(result))
       .catch((error) => console.error(error));
-  } catch (e) {}
+  } catch (e) {
+    throw e;
+  }
+}
+
+export async function GetOnseiData(id: number) {
+  try {
+    const requestOptions = {
+      method: "GET",
+      headers: myHeaders,
+      redirect: "follow" as RequestRedirect,
+    };
+
+    const response = await fetch(apiURL + "/onsei_lists?user_id=" + id, requestOptions);
+    const result = await response.json();
+    return result;
+  } catch (e) {
+    console.log(e);
+    throw e;
+  }
 }
 
 export async function GetUser() {
@@ -82,16 +92,12 @@ export async function GetUser() {
       redirect: "follow" as RequestRedirect,
     };
 
-    const result = await fetch(apiURL + "/users", requestOptions)
-      .then((response) => response.text())
-      .then((result) => {
-        return JSON.parse(result);
-      })
-      .catch((error) => console.error(error));
+    const response = await fetch(apiURL + "/users", requestOptions);
+    const result = await response.json();
     return result;
   } catch (e) {
     console.log(e);
-    return e;
+    throw e;
   }
 }
 
@@ -108,15 +114,33 @@ export async function PatchUser(id: number, wanderer_flg: number) {
       redirect: "follow" as RequestRedirect,
     };
 
-    const result = await fetch(apiURL + "/users/" + id, requestOptions)
-      .then((response) => response.text())
-      .then((result) => {
-        return JSON.parse(result);
-      })
-      .catch((error) => console.error(error));
+    const response = await fetch(apiURL + "/users/" + id, requestOptions);
+    const result = await response.json();
     return result;
   } catch (e) {
     console.log(e);
-    return e;
+    throw e;
+  }
+}
+
+export async function DeleteOnseiData(id: number) {
+  try {
+    const raw = JSON.stringify({
+      "del_flg": 1
+    });
+
+    const requestOptions = {
+      method: "PATCH",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow" as RequestRedirect,
+    };
+
+    const response = await fetch(apiURL + "/onsei_lists/" + id, requestOptions);
+    const result = await response.json();
+    return result;
+  } catch (e) {
+    console.log(e);
+    throw e;
   }
 }
