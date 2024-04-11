@@ -24,7 +24,7 @@ const StartRec: React.FC<StartRecProps> = ({ onAudioReady }) => {
       });
       const mimeType = MediaRecorder.isTypeSupported("audio/webm")
         ? "audio/webm"
-        : "audio/mp3";
+        : "audio/wav";
 
       // ビットレートを指定
       const options = { mimeType, bitsPerSecond: 256000 };
@@ -50,7 +50,6 @@ const StartRec: React.FC<StartRecProps> = ({ onAudioReady }) => {
 
   const stopRecording = () => {
     if (!recording || !mediaRecorder) return;
-
     mediaRecorder.stop();
     setRecording(false);
   };
