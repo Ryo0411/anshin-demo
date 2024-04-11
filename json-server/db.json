@@ -13,6 +13,13 @@
       "del_flg": 0,
       "id": 2,
       "wanderer_flg": 1
+    },
+    {
+      "name": "鈴木 幹",
+      "sex": 0,
+      "del_flg": 0,
+      "wanderer_flg": 0,
+      "id": 3
     }
   ],
   "onsei_lists": [

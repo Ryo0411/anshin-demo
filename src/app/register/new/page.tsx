@@ -148,16 +148,18 @@ function RegisterNew() {
             {/* RadioButton for Sex */}
             <FormControl>
               <FormLabel>性別</FormLabel>
-              <RadioGroup row value={sexValue}>
+              <RadioGroup row value={sexValue} onChange={(e) => setSexValue(parseInt(e.target.value))}>
                 <FormControlLabel
                   value={0}
-                  control={<Radio {...register('sex')} />}
+                  control={<Radio />}
                   label="男"
+                  onClick={() => setSexValue(0)} // 男性をクリックしたときにsexValueを0に設定
                 />
                 <FormControlLabel
                   value={1}
-                  control={<Radio {...register("sex")} />}
+                  control={<Radio />}
                   label="女"
+                  onClick={() => setSexValue(1)} // 女性をクリックしたときにsexValueを1に設定
                 />
               </RadioGroup>
             </FormControl>
