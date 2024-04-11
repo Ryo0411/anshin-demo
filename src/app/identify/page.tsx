@@ -18,6 +18,7 @@ import LoadingScreen from "@/app/components/Loading";
 interface ScoreItem {
   score: number;
   user_id: number;
+  audio_name: string;
 }
 
 interface User {
@@ -32,6 +33,7 @@ interface ScoreData {
   score: number;
   user_id: number;
   name: string;
+  audio_name: string;
 }
 
 function Identify() {
@@ -57,15 +59,17 @@ function Identify() {
           resetWavUrl();
 
           const combinedResponse: ScoreData[] = getScore.map((scoreItem) => {
+            console.log(scoreItem)
             const user = getUser.find((user) => user.id === scoreItem.user_id);
+            console.log(user)
             return {
               ...scoreItem,
               name: user?.name ?? 'Unknown',
+              id: user?.id,
             };
           });
 
           setResponse(combinedResponse);
-
           setLoading(false);
 
           // 成功した場合の処理
@@ -75,7 +79,8 @@ function Identify() {
           setLoading(false);
           console.error("API call failed:", error);
           // 失敗した場合の処理
-          setMessage("Error");
+          setMessage("録音時間が短すぎます。");
+          setShowError(true);
           throw error;
         }
       })();
@@ -95,6 +100,7 @@ function Identify() {
 
         setMessage("音声を録音してください。");
         setShowError(true);
+        setLoading(false);
 
         // ファイル選択状態や録音状態もリセットする
         setResetAudio(prev => !prev);
@@ -105,6 +111,7 @@ function Identify() {
       console.error("Error:", error);
       setMessage("Error");
       setShowError(true);
+      setLoading(false);
       throw error;
     }
   };

@@ -61,10 +61,9 @@ function RegisterList() {
       } else {
         await removeWavScp(id);
       }
-
-      setLoading(false);
-
+      // 学習データの更新
       await enrollAudio();
+      setLoading(false);
     } catch (error) {
       setLoading(false);
       console.error("Error updating user:", error);

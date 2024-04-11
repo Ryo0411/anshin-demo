@@ -113,6 +113,8 @@ const OnseiListPage = () => {
           await CreateOnseiData(response.id, response.audio_name);
           resetWavUrl();
 
+          await fetchOnseiLists(Number(id));
+
           // 成功した場合の処理
           setMessage("Success");
           setShowSuccess(true);
@@ -126,7 +128,7 @@ const OnseiListPage = () => {
         }
       })();
     }
-  }, [wavBlobUrl]);
+  }, [wavBlobUrl, id]);
 
   // 登録処理
   const submit = async () => {
