@@ -41,11 +41,11 @@ function RegisterList() {
     fetchUsers();
   }, []);
 
-  // 徘徊者フラグを更新するための関数
+  // 迷子者フラグを更新するための関数
   const handleWandererChange = async (id: number, checked: boolean) => {
     try {
       setLoading(true);
-      // 徘徊者フラグの更新APIを呼び出す
+      // 迷子者フラグの更新APIを呼び出す
       await PatchUser(id, checked ? 1 : 0);
 
       // ユーザーリストの更新
@@ -97,7 +97,7 @@ function RegisterList() {
                 </Link>
                 <Typography>{user.sex === 0 ? "男" : "女"}</Typography>
                 <FormControlLabel
-                  label="徘徊者フラグ"
+                  label="迷子者フラグ"
                   control={
                     <Checkbox
                       checked={user.wanderer_flg === 1}
