@@ -1,18 +1,12 @@
 {
-  "users": [
+  "jwtget": [
     {
-      "name": "鈴木",
-      "sex": 0,
-      "del_flg": 0,
-      "wanderer_flg": 1,
-      "id": 1
-    },
+      "result": "asdasdasdjkhafdhakjdhfkadjfhalidfhalkjsd"
+    }
+  ],
+  "jwt": [
     {
-      "name": "android",
-      "sex": 0,
-      "del_flg": 0,
-      "wanderer_flg": 1,
-      "id": 2
+      "result": true
     }
   ],
   "onsei_lists": [

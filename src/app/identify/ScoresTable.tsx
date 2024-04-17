@@ -38,13 +38,20 @@ const calculateAverageScores = (data: ScoreData[]): AverageScoreData[] => {
     return acc;
   }, {} as ScoresByUserId);
 
-  return Object.entries(scoresByUserId).map(([userId, { scores, name, audio_name }]) => ({
+  // 平均スコアを計算し、その結果を一時配列に格納
+  const averages = Object.entries(scoresByUserId).map(([userId, { scores, name, audio_name }]) => ({
     user_id: parseInt(userId),
     average_score: scores.reduce((total: number, current: number) => total + current, 0) / scores.length,
     name,
     audio_name: audio_name,
   }));
+
+  // 平均スコアで降順にソート
+  averages.sort((a, b) => b.average_score - a.average_score);
+
+  return averages;
 };
+
 
 // スコアデータを表示するテーブルコンポーネント
 interface ScoresTableProps {

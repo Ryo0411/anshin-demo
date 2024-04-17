@@ -58,14 +58,17 @@ function Identify() {
           const getUser: User[] = await GetUser();
           resetWavUrl();
 
-          const combinedResponse: ScoreData[] = getScore.map((scoreItem) => {
-            console.log(scoreItem)
+          // getScore をスコアの降順でソート
+          const sortedScores = getScore.sort((a, b) => b.score - a.score);
+
+          const combinedResponse: (ScoreData & { name: string })[] = sortedScores.map((scoreItem) => {
+            console.log(scoreItem);
             const user = getUser.find((user) => user.id === scoreItem.user_id);
-            console.log(user)
+            console.log(user);
             return {
               ...scoreItem,
-              name: user?.name ?? 'Unknown',
               id: user?.id,
+              name: user?.name ?? 'Unknown',
             };
           });
 
